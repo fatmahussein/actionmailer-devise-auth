@@ -117,6 +117,10 @@ config.action_mailer.delivery_method = :smtp
   open_timeout:    5,
   read_timeout:    5 }
 ```
+Please change this to be true in your file
+
+`config.action_mailer.raise_delivery_errors = true`
+
 Your Rails application should now be able to send outbound emails.
 
 ### Securing your email and password
