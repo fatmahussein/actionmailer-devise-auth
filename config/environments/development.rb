@@ -1,8 +1,19 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:         'smtp.gmail.com',
+  port:            587,
+  domain:          'example.com',
+  user_name:       Rails.application.credentials.email[:username],
+  password:        Rails.application.credentials.email[:password],
+  authentication:  'plain',
+  enable_starttls: true,
+  open_timeout:    5,
+  read_timeout:    5 }
+
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -35,7 +46,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
